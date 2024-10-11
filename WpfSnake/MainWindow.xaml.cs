@@ -21,6 +21,8 @@ namespace WpfSnake
         private Direction currentDirection = Direction.Right;
 
         private List<Ellipse> snakeParts = new List<Ellipse>();
+        private List<int> scoreHistory = new List<int>(); // Store score history
+
         private Ellipse food;
         private Random random = new Random();
         private DispatcherTimer gameTimer;
@@ -30,6 +32,7 @@ namespace WpfSnake
         {
             InitializeComponent();
             StartGame();
+            scoreHistory.Clear(); // Clear history when starting a new game
         }
 
         private void StartGame()
@@ -162,7 +165,18 @@ namespace WpfSnake
         private void EndGame()
         {
             gameTimer.Stop();
-            MessageBox.Show($"Game Over! Your score: {score}", "Snake Game", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            // Add current score to history
+            scoreHistory.Add(score);
+
+            // Display score history
+            string scoreListMessage = "Score History:\n";
+            for (int i = 0; i < scoreHistory.Count; i++)
+            {
+                scoreListMessage += $"Game {i + 1}: {scoreHistory[i]}\n";
+            }
+
+            MessageBox.Show($"Game Over! Your score: {score}\n\n{scoreListMessage}", "Snake Game", MessageBoxButton.OK, MessageBoxImage.Information);
             StartGame();
         }
 

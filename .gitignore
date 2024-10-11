@@ -1,0 +1,19 @@
+# Build artifacts
+bin/
+obj/
+
+# User-specific files
+*.suo
+*.user
+
+# Visual Studio cache files
+.vs/
+
+# Package Management
+*.lock.json
+*.nupkg
+*.snupkg
+
+# Debug and release folders
+Debug/
+Release/
